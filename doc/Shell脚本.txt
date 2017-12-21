@@ -86,3 +86,10 @@ array_name[index]="YC" //赋值
 十、函数,函数内可通过$n来获取第n个参数，返回值在调用函数后通过$？获取
 function_name () {
 }
+
+十一、awk命令：'{}'把文件逐行读入，再以空格将每行切片，切开后再进入其它处理，第一个域为$1，第二个为$2，$NF为最后一个切片,$0为整条记录
+-F "" //-F改变默认分隔符，中间可能“|”添加多个分隔符
+netcfg | busybox awk '{print $3}' | busybox awk -F "/" '{print $1}'
+
+十二、sed替换命令：'s/原来字符串/新字符串/'
+netcfg | busybox sed 's/UP/DOWN/'
