@@ -90,6 +90,20 @@ function_name () {
 十一、awk命令：'{}'把文件逐行读入，再以空格将每行切片，切开后再进入其它处理，第一个域为$1，第二个为$2，$NF为最后一个切片,$0为整条记录
 -F "" //-F改变默认分隔符，中间可能“|”添加多个分隔符
 netcfg | busybox awk '{print $3}' | busybox awk -F "/" '{print $1}'
+格式：awk [-F 分割符]'pattern + action' {filenames}， pattern为正则表达式，用两个"//"包括
+1、ps | busybox awk '{print $3}'
+读入有“\n”换行符分割的一条记录，默认分割符是“空白键”或者【Tab】键
+2、ps | busybox awk -F '.' '{print $1}'
+-F 添加分隔符
+3、 ps | busybox awk '{print $1 "\t" $2}'
+action 操作多个域
+4、ps | busybox awk 'BEGIN {print "name, pid"} {print $1 "\t" $2} END {print "blue, hello"}'
+BEGIN {}，END {} 添加开始和结束操作
+5、ps | busybox awk '/root/'
+匹配pattern
+6、ps | busybox awk '/root/{print $2}'
+匹配pattern+action
+
 
 十二、sed替换命令：'s/原来字符串/新字符串/'
 netcfg | busybox sed 's/UP/DOWN/'
